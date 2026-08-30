@@ -1,0 +1,349 @@
+/* ============================================================
+   TOMORROWLAND 2026 — ESTILOS DE PÁGINAS INDEPENDIENTES
+   ============================================================
+   Usado por las páginas fuera de index.html:
+   festival/belgica.html, festival/brasil.html,
+   eventos/belgica-2026.html, eventos/brasil-2027.html,
+   musica/sets-videos.html.
+
+   Reutiliza a propósito los tokens y componentes ya definidos
+   en styles.css/animations.css (.section, .section-title,
+   .reveal, .btn, .card-track, .grid-card, .news-card...) para
+   que estas páginas se sientan parte del mismo sitio, no una
+   plantilla aparte.
+   ============================================================ */
+
+/* ---------- Estado "activo" del ítem de nav correspondiente a esta página ----------
+   El scroll-spy de js/animations.js (initNavScrollSpy) solo observa las
+   secciones de index.html, así que en estas páginas independientes el
+   estado activo se marca directamente en el HTML en vez de por scroll. */
+.dropdown-link.active {
+  color: var(--color-text);
+  background: var(--color-surface-2);
+}
+.mobile-sublink.active { color: var(--accent-cyan); }
+
+/* ---------- Migas de pan ---------- */
+.breadcrumb {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: calc(var(--header-height) + 24px) 32px 0;
+  font-size: .82rem;
+  color: var(--color-text-faint);
+}
+.breadcrumb a { color: var(--color-text-muted); transition: color .25s; }
+.breadcrumb a:hover { color: var(--accent-cyan); }
+.breadcrumb-sep { opacity: .5; }
+.breadcrumb-current { color: var(--color-text); }
+
+/* ---------- Banner de página (versión estática del hero, sin carrusel) ---------- */
+.page-hero {
+  position: relative;
+  min-height: 46vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+.page-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7,7,12,.35) 0%, rgba(7,7,12,.55) 55%, var(--color-bg) 100%),
+    radial-gradient(circle at 20% 20%, rgba(138,43,255,.28), transparent 55%);
+}
+.page-hero-content {
+  position: relative;
+  z-index: 2;
+  padding-top: 64px;
+  padding-bottom: 64px;
+  max-width: 820px;
+}
+.page-hero .section-title {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  color: #fff;
+  -webkit-background-clip: unset;
+  background-clip: unset;
+  background: none;
+}
+.page-hero .section-title span {
+  background: var(--gradient-aurora);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.page-hero-subtitle {
+  margin-top: 16px;
+  max-width: 620px;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+/* Imagen de fondo de cada banner de página (una clase por página, en vez
+   de estilos inline, para seguir la misma convención que el resto del
+   sitio). Las rutas son relativas a este archivo CSS (css/pages.css). */
+.page-hero--festival-belgica { background-image: url('../assets/images/belgium/belgium-3.jpg'); }
+.page-hero--festival-brasil  { background-image: url('../assets/images/brazil/brazil-2.jpg'); }
+.page-hero--eventos-belgica  { background-image: url('../assets/images/belgium/belgium-1.jpg'); }
+.page-hero--eventos-brasil   { background-image: url('../assets/images/brazil/brazil-4.jpg'); }
+.page-hero--musica           { background-image: url('../assets/images/general/crowd-lights.jpg'); }
+
+/* Título más compacto para usar dentro de .content-split (no es el título
+   principal de la página, así que no necesita el tamaño de un hero). */
+.content-split-title { font-size: clamp(2rem, 3.6vw, 2.8rem); }
+
+/* ---------- Tira de datos rápidos (fecha, lugar, edición...) ---------- */
+.quick-facts {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+.quick-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  backdrop-filter: blur(6px);
+}
+.quick-fact-label {
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+}
+.quick-fact-value {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  letter-spacing: .01em;
+}
+
+/* ---------- Contenido a dos columnas (texto + imagen) ---------- */
+.content-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.content-split.is-reversed .content-split-media { order: 2; }
+.content-split-text { display: flex; flex-direction: column; gap: 18px; }
+.content-split-text p { color: var(--color-text-muted); font-size: 1rem; line-height: 1.7; }
+.content-split-media {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 40px 80px rgba(0,0,0,.5);
+  aspect-ratio: 4 / 3;
+}
+.content-split-media img { width: 100%; height: 100%; object-fit: cover; }
+.content-split-glow {
+  position: absolute;
+  inset: -30px;
+  background: var(--gradient-aurora);
+  filter: blur(60px);
+  opacity: .22;
+  z-index: -1;
+  border-radius: var(--radius-lg);
+}
+
+/* ---------- Grid de características ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feature-card {
+  display: block;
+  padding: 32px 26px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: border-color .4s, box-shadow .4s, transform .4s var(--ease-out);
+}
+.feature-card:hover {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 30px 60px -28px rgba(41, 231, 240, .35);
+  transform: translateY(-4px);
+}
+.feature-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  background: var(--gradient-aurora);
+  font-size: 1.1rem;
+}
+.feature-card-title { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 10px; }
+.feature-card-desc { font-size: .92rem; color: var(--color-text-muted); line-height: 1.6; }
+
+/* ---------- Aviso / nota informativa ---------- */
+.notice-box {
+  display: flex;
+  gap: 14px;
+  padding: 20px 24px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--accent-gold);
+}
+.notice-box-icon { flex-shrink: 0; font-size: 1.2rem; }
+.notice-box p { font-size: .88rem; color: var(--color-text-muted); line-height: 1.6; }
+.notice-box strong { color: var(--color-text); }
+.notice-box a { color: var(--accent-cyan); }
+
+/* ---------- Entradas / tickets ---------- */
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.ticket-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 28px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  transition: border-color .4s, box-shadow .4s, transform .4s var(--ease-out);
+}
+.ticket-card:hover { transform: translateY(-4px); box-shadow: 0 30px 60px -28px rgba(138, 43, 255, .4); }
+.ticket-card.is-featured { border-color: var(--accent-magenta); }
+.ticket-card-badge {
+  align-self: flex-start;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent-magenta);
+  border: 1px solid rgba(255,46,134,.4);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+.ticket-card-title { font-family: var(--font-display); font-size: 1.5rem; }
+.ticket-card-desc { font-size: .9rem; color: var(--color-text-muted); line-height: 1.5; }
+.ticket-card-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.ticket-card-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .88rem;
+  color: var(--color-text-muted);
+}
+.ticket-card-list li::before {
+  content: '✦';
+  color: var(--accent-cyan);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.ticket-card .btn { align-self: flex-start; margin-top: auto; }
+
+/* ---------- Showcase de video: 1 principal + varios secundarios ----------
+   Usado en la sección de video de index.html y en musica/sets-videos.html.
+   Cada video (el principal o cualquiera de los secundarios) es un
+   reproductor independiente: reutiliza tal cual .video-frame/
+   .video-responsive/.video-play-btn de css/styles.css (miniatura + botón
+   de reproducir, el iframe se inyecta recién al hacer clic), así que
+   js/video.js —ya preparado para cualquier cantidad de reproductores por
+   página— los maneja a todos sin tocarle una línea. */
+.video-showcase { display: flex; flex-direction: column; align-items: center; gap: 28px; }
+.video-showcase .video-frame { width: 100%; max-width: 920px; }
+
+.video-showcase-caption {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+.video-showcase-caption .video-fallback-link { margin-top: 0; }
+
+.video-secondary-grid {
+  width: 100%;
+  max-width: 920px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.video-secondary { display: flex; flex-direction: column; gap: 10px; cursor: pointer; }
+.video-secondary .video-responsive {
+  /* aspect-ratio: 16/9 ya viene de la regla base en css/styles.css. Sin
+     transform en la transición a propósito: adentro vive .video-play-btn,
+     que tiene backdrop-filter + border-radius:50% — combinarlo con un
+     transform animado en el contenedor puede disparar el mismo recorte
+     que ya se corrigió en .video-play-btn:hover y en .btn:hover. */
+  transition: border-color .35s, box-shadow .35s;
+}
+.video-secondary:hover .video-responsive {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 0 1px rgba(41, 231, 240, .4), 0 25px 50px -22px rgba(41, 231, 240, .45);
+}
+.video-secondary-title {
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+/* Botón de reproducir más chico, para los videos secundarios (el grande
+   de 84px se ve desproporcionado en una tarjeta de un tercio de ancho). */
+.video-play-btn--sm { width: 52px; height: 52px; }
+.video-play-btn--sm svg { width: 20px; height: 20px; margin-left: 2px; }
+
+/* ---------- Fila de llamadas a la acción al pie de sección ---------- */
+.cta-row {
+  display: flex;
+  justify-content: center; /* el carrusel de tarjetas de arriba está centrado (margin:auto); sin esto, los botones quedaban pegados a la izquierda del section-inner, mucho más ancho */
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 44px;
+}
+/* Sección final de una página, solo con la fila de CTA — más angosta que
+   una sección de contenido normal para no dejar un hueco enorme. */
+.section--cta { padding: 40px 0 120px; }
+.section--cta .cta-row { margin-top: 0; }
+
+.ticket-grid + .notice-box { margin-top: 32px; }
+.notice-box + .feature-grid { margin-top: 40px; }
+
+/* Variante de una sola columna, centrada (ej. tarjeta de "notificarme"
+   en una edición aún sin fechas confirmadas). */
+.ticket-grid--single { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .feature-grid { grid-template-columns: repeat(2, 1fr); }
+  .ticket-grid { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; }
+  .video-secondary-grid { grid-template-columns: repeat(2, 1fr); max-width: 620px; }
+}
+
+@media (max-width: 768px) {
+  .breadcrumb { padding: calc(var(--header-height) + 18px) 22px 0; }
+  .page-hero { min-height: 40vh; }
+  .content-split { grid-template-columns: 1fr; gap: 32px; }
+  .content-split.is-reversed .content-split-media { order: 0; }
+  .feature-grid { grid-template-columns: 1fr; }
+  .video-secondary-grid { grid-template-columns: 1fr; max-width: 420px; }
+}
+
+@media (max-width: 480px) {
+  .quick-facts { gap: 10px; }
+  .quick-fact { padding: 10px 16px; }
+}

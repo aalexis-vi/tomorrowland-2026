@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomorrowland Bélgica 2026 · A New Reality | Tomorrowland</title>
+  <meta name="description" content="Tomorrowland Bélgica 2026 — 25, 26 y 27 de julio en Boom. Fechas, entradas, el escenario principal Consciencia y las últimas noticias de esta edición.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/favicon-180.png">
+
+  <meta property="og:title" content="Tomorrowland Bélgica 2026 · A New Reality">
+  <meta property="og:image" content="../assets/images/general/social-share.jpg">
+
+  <link rel="stylesheet" href="../assets/vendor/animate-css/animate.min.css">
+  <link rel="stylesheet" href="../assets/vendor/lenis/lenis.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="tl-goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur" />
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="../index.html#inicio" class="logo" aria-label="Tomorrowland — inicio">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">Tomorrowland</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../index.html#inicio" class="nav-link">Inicio</a></li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle" aria-expanded="false">Festival <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="../festival/belgica.html" class="dropdown-link">Tomorrowland Bélgica</a>
+              <a href="../festival/brasil.html" class="dropdown-link">Tomorrowland Brasil</a>
+              <a href="../index.html#radio" class="dropdown-link">Estación de Radio</a>
+            </div>
+          </li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle active" aria-expanded="false">Eventos <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="belgica-2026.html" class="dropdown-link active" aria-current="page">Bélgica 2026</a>
+              <a href="brasil-2027.html" class="dropdown-link">Brasil 2027</a>
+            </div>
+          </li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle" aria-expanded="false">Música <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="../musica/sets-videos.html" class="dropdown-link">Sets y videos</a>
+              <a href="../index.html#radio" class="dropdown-link">Estación de Radio</a>
+            </div>
+          </li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle" aria-expanded="false">Tienda <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="#" class="dropdown-link">Merchandise</a>
+              <a href="#" class="dropdown-link">Entradas</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html#inicio" class="mobile-link">Inicio</a></li>
+        <li class="mobile-accordion">
+          <button class="mobile-accordion-toggle">Festival</button>
+          <div class="mobile-accordion-panel">
+            <a href="../festival/belgica.html" class="mobile-sublink">Tomorrowland Bélgica</a>
+            <a href="../festival/brasil.html" class="mobile-sublink">Tomorrowland Brasil</a>
+            <a href="../index.html#radio" class="mobile-sublink">Estación de Radio</a>
+          </div>
+        </li>
+        <li class="mobile-accordion open">
+          <button class="mobile-accordion-toggle">Eventos</button>
+          <div class="mobile-accordion-panel">
+            <a href="belgica-2026.html" class="mobile-sublink active" aria-current="page">Bélgica 2026</a>
+            <a href="brasil-2027.html" class="mobile-sublink">Brasil 2027</a>
+          </div>
+        </li>
+        <li class="mobile-accordion">
+          <button class="mobile-accordion-toggle">Música</button>
+          <div class="mobile-accordion-panel">
+            <a href="../musica/sets-videos.html" class="mobile-sublink">Sets y videos</a>
+            <a href="../index.html#radio" class="mobile-sublink">Estación de Radio</a>
+          </div>
+        </li>
+        <li class="mobile-accordion">
+          <button class="mobile-accordion-toggle">Tienda</button>
+          <div class="mobile-accordion-panel">
+            <a href="#" class="mobile-sublink">Merchandise</a>
+            <a href="#" class="mobile-sublink">Entradas</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="../index.html#inicio">Inicio</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span>Eventos</span>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Bélgica 2026</span>
+    </nav>
+
+    <!-- ============================================================
+         BANNER DEL EVENTO
+         ============================================================ -->
+    <section class="page-hero page-hero--eventos-belgica">
+      <div class="page-hero-overlay" aria-hidden="true"></div>
+      <div class="page-hero-content section-inner reveal">
+        <span class="section-eyebrow">25 · 26 · 27 julio 2026 · Boom, Bélgica</span>
+        <h1 class="section-title">Tomorrowland Bélgica <span>2026</span></h1>
+        <p class="page-hero-subtitle">A New Reality. La edición 2026 trae un escenario principal completamente nuevo — Consciencia — y dos fines de semana para vivirlo.</p>
+
+        <div class="quick-facts">
+          <div class="quick-fact">
+            <span class="quick-fact-label">Fechas</span>
+            <span class="quick-fact-value">25–27 julio 2026</span>
+          </div>
+          <div class="quick-fact">
+            <span class="quick-fact-label">Lugar</span>
+            <span class="quick-fact-value">De Schorre, Boom</span>
+          </div>
+          <div class="quick-fact">
+            <span class="quick-fact-label">Escenario principal</span>
+            <span class="quick-fact-value">Consciencia</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ÚLTIMAS NOTICIAS DE LA EDICIÓN
+         ============================================================ -->
+    <section class="section section-belgium js-blur-on-scroll">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="section-eyebrow">Bélgica · Boom</span>
+          <h2 class="section-title">Las últimas noticias de 2026</h2>
+        </div>
+
+        <div class="card-carousel" id="belgica2026Carousel" aria-label="Noticias de Tomorrowland Bélgica 2026">
+          <div class="card-track" id="belgica2026Track" data-lenis-prevent>
+            <article class="news-card">
+              <div class="news-card-media"><img src="../assets/images/belgium/belgium-1.jpg" alt="Sets completos de Tomorrowland disponibles en YouTube y la app oficial" loading="lazy" class="js-parallax" data-speed="0.06"></div>
+              <div class="news-card-body">
+                <h3 class="news-card-title">Sets completos disponibles en YouTube, la app de Tomorrowland y Apple Music</h3>
+                <p class="news-card-desc">Revive la magia de Tomorrowland 2026 desde donde estés.</p>
+                <a class="news-card-link" href="../musica/sets-videos.html">Ver sets y videos <span class="btn-arrow" aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="news-card">
+              <div class="news-card-media"><img src="../assets/images/belgium/belgium-2.jpg" alt="Cierre de una edición inolvidable de Tomorrowland Bélgica" loading="lazy" class="js-parallax" data-speed="0.06"></div>
+              <div class="news-card-body">
+                <h3 class="news-card-title">Se ha cerrado un capítulo inolvidable de Tomorrowland Bélgica</h3>
+                <p class="news-card-desc">Juntos, hemos escrito páginas únicas, hermosas e intensas en la historia de Consciencia.</p>
+                <a class="news-card-link" href="#">Ver más <span class="btn-arrow" aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="news-card">
+              <div class="news-card-media"><img src="../assets/images/belgium/belgium-3.jpg" alt="El escenario principal Consciencia de Tomorrowland Bélgica" loading="lazy" class="js-parallax" data-speed="0.06"></div>
+              <div class="news-card-body">
+                <h3 class="news-card-title">Este es el escenario principal "Consciencia" de Tomorrowland Bélgica</h3>
+                <p class="news-card-desc">Un primer vistazo a la impresionante pieza central de la edición 2026.</p>
+                <a class="news-card-link" href="#">Ver más <span class="btn-arrow" aria-hidden="true">→</span></a>
+              </div>
+            </article>
+            <article class="news-card">
+              <div class="news-card-media"><img src="../assets/images/belgium/belgium-4.jpg" alt="El mundo de Consciencia en Tomorrowland Bélgica 2026" loading="lazy" class="js-parallax" data-speed="0.06"></div>
+              <div class="news-card-body">
+                <h3 class="news-card-title">Entra en el mundo de Consciencia</h3>
+                <p class="news-card-desc">Una magnífica historia donde lo imposible es solo un sueño a punto de hacerse realidad.</p>
+                <a class="news-card-link" href="#">Ver más <span class="btn-arrow" aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          </div>
+
+          <div class="card-carousel-controls">
+            <button class="card-arrow card-arrow-prev magnetic" data-target="belgica2026Track" aria-label="Anterior">‹</button>
+            <button class="card-arrow card-arrow-next magnetic" data-target="belgica2026Track" aria-label="Siguiente">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         ENTRADAS
+         ============================================================ -->
+    <section class="section section-video js-blur-on-scroll">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="section-eyebrow">Vive la edición 2026</span>
+          <h2 class="section-title">Entradas y paquetes</h2>
+        </div>
+
+        <div class="ticket-grid">
+          <article class="ticket-card reveal">
+            <h3 class="ticket-card-title">Weekend Pass</h3>
+            <p class="ticket-card-desc">Acceso completo a uno de los dos fines de semana del festival.</p>
+            <ul class="ticket-card-list">
+              <li>3 días de música en todos los escenarios</li>
+              <li>Acceso a las zonas generales del recinto</li>
+              <li>Ideal para vivir la experiencia por primera vez</li>
+            </ul>
+            <a class="btn" href="#">Más información</a>
+          </article>
+          <article class="ticket-card is-featured reveal">
+            <span class="ticket-card-badge">Más popular</span>
+            <h3 class="ticket-card-title">Global Journey</h3>
+            <p class="ticket-card-desc">El paquete que combina entrada, alojamiento y traslados en una sola experiencia.</p>
+            <ul class="ticket-card-list">
+              <li>Entrada de fin de semana incluida</li>
+              <li>Alojamiento gestionado por el equipo oficial</li>
+              <li>Pensado para quienes viajan desde el exterior</li>
+            </ul>
+            <a class="btn" href="#">Más información</a>
+          </article>
+          <article class="ticket-card reveal">
+            <h3 class="ticket-card-title">DreamVille</h3>
+            <p class="ticket-card-desc">El camping oficial junto al festival, para que la magia no termine al bajar el volumen.</p>
+            <ul class="ticket-card-list">
+              <li>A pocos minutos a pie del recinto</li>
+              <li>Distintas modalidades de alojamiento</li>
+              <li>Ambiente festivalero las 24 horas</li>
+            </ul>
+            <a class="btn" href="#">Más información</a>
+          </article>
+        </div>
+
+        <div class="notice-box reveal">
+          <span class="notice-box-icon" aria-hidden="true">ℹ️</span>
+          <p><strong>Precios y disponibilidad:</strong> se confirman y actualizan en los canales oficiales de venta. Esta página es una demostración y no vende entradas reales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LINE-UP
+         ============================================================ -->
+    <section class="section section-brazil js-blur-on-scroll">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="section-eyebrow">Próximamente</span>
+          <h2 class="section-title">Line-up 2026</h2>
+        </div>
+        <div class="notice-box reveal">
+          <span class="notice-box-icon" aria-hidden="true">🎧</span>
+          <p>El cartel de artistas se anuncia de forma progresiva en los canales oficiales de Tomorrowland en los meses previos al festival. Vuelve pronto para conocer las novedades — mientras tanto, revive ediciones anteriores en <a href="../musica/sets-videos.html">Sets y videos</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-radio js-blur-on-scroll section--cta">
+      <div class="section-inner">
+        <div class="cta-row reveal">
+          <a class="btn" href="../festival/belgica.html">Conocer Tomorrowland Bélgica <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="brasil-2027.html">Ver Tomorrowland Brasil 2027</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html#inicio" class="logo logo--footer" aria-label="Tomorrowland — inicio">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="logo-text">Tomorrowland</span>
+        </a>
+        <p class="footer-tagline">A festival of dreams, music &amp; unity.</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Enlaces del sitio">
+        <div class="footer-col">
+          <h3 class="footer-col-title">Festival</h3>
+          <a href="../festival/belgica.html">Tomorrowland Bélgica</a>
+          <a href="../festival/brasil.html">Tomorrowland Brasil</a>
+          <a href="../index.html#radio">Estación de Radio</a>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Explorar</h3>
+          <a href="../musica/sets-videos.html">Música</a>
+          <a href="#">Tienda</a>
+          <a href="../index.html#inicio">Inicio</a>
+        </div>
+      </nav>
+
+      <div class="footer-social">
+        <h3 class="footer-col-title">Síguenos</h3>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h2V5h-2c-2.2 0-4 1.8-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9c0-.6.4-1 1-1z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4v9.5a3.2 3.2 0 1 1-2.4-3.1"/><path d="M14 4c.4 2 2 3.6 4 4"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l16 16M20 4L4 20"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="footerYear"></span> Tomorrowland. Todos los derechos reservados. Sitio de fans — proyecto de demostración.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/vendor/gsap/gsap.min.js"></script>
+  <script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../assets/vendor/anime/anime.min.js"></script>
+  <script src="../assets/vendor/lottie/lottie.min.js"></script>
+  <script src="../assets/vendor/lenis/lenis.min.js"></script>
+
+  <script src="../js/smooth-scroll.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/carousel.js"></script>
+  <script src="../js/animations.js"></script>
+  <script src="../js/effects.js"></script>
+  <script src="../js/video.js"></script>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>

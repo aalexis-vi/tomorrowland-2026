@@ -1,0 +1,424 @@
+﻿/* ============================================================
+   TOMORROWLAND 2026 — ANIMACIONES
+   ============================================================
+   El scroll-reveal, el parallax y la línea de tiempo del hero
+   ahora los controla GSAP + ScrollTrigger desde js/animations.js
+   (ver ese archivo). Por eso aquí NO hay `transition` en las
+   propiedades que GSAP anima directamente (opacity/translate/
+   scale/filter) — mezclar una transición CSS con un tween de
+   GSAP sobre la misma propiedad genera tirones. Lo que sí vive
+   en este archivo son los estados iniciales/de respaldo y las
+   animaciones puramente decorativas (pulsos, brillos, etc.).
+   ============================================================ */
+
+/* Cue de scroll en el hero (respaldo si Lottie no carga) */
+@keyframes scrollCue {
+  0%   { transform: translate(-50%, 0);   opacity: 1; }
+  70%  { opacity: .2; }
+  100% { transform: translate(-50%, 16px); opacity: 0; }
+}
+
+/* Pulsación de las flechas del hero */
+@keyframes arrowPulseEnhanced {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(41, 231, 240, 0.4); transform: translateY(-50%) scale(1); }
+  50%      { box-shadow: 0 0 0 12px rgba(41, 231, 240, 0); transform: translateY(-50%) scale(1.05); }
+}
+
+/* Entrada con bounce del indicador activo del hero */
+@keyframes dotPulse {
+  0%   { transform: scale(0.8); opacity: 0; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Barra de progreso del indicador activo del hero */
+@keyframes dotFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Brillo que recorre el título de sección la primera vez que aparece (GSAP dispara la clase) */
+@keyframes titleShimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 130% 50%; }
+}
+
+/* Brillo diagonal deslizante sobre imágenes al pasar el mouse */
+@keyframes imageBrillo {
+  0%   { left: -60%; }
+  100% { left: 120%; }
+}
+
+/* Brillo pulsante en el texto del título del hero */
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(138, 43, 255, 0.3); }
+  50%      { text-shadow: 0 0 30px rgba(41, 231, 240, 0.6); }
+}
+
+/* Respaldo de ripple si Anime.js no está disponible (ver css/styles.css .btn-ripple) */
+@keyframes rippleExpandFallback {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Efecto de entrada fluida desde abajo */
+@keyframes slideUpReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* Efecto de escala suave en entrada */
+@keyframes scaleInReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Efecto de rotación sutil en entrada */
+@keyframes rotateInReveal {
+  from {
+    opacity: 0;
+    transform: rotateX(8deg) translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0) translateY(0);
+  }
+}
+
+/* Efecto de brillo horizontal en secciones */
+@keyframes sectionShimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Efecto de pulso suave para elementos destacados */
+@keyframes subtlePulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(41, 231, 240, 0.4);
+  }
+  50% { 
+    box-shadow: 0 0 0 8px rgba(41, 231, 240, 0);
+  }
+}
+
+/* ============ ANIMACIONES AVANZADAS DE DESENFOQUE (BLUR SCROLL) ============ */
+
+/* Blur progresivo al hacer scroll (entrada) */
+@keyframes progressiveBlurIn {
+  0% {
+    filter: blur(16px);
+    opacity: 0;
+  }
+  50% {
+    filter: blur(8px);
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* Blur al salir del viewport */
+@keyframes blurOutOnScroll {
+  0% {
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(12px);
+    opacity: 0.6;
+  }
+}
+
+/* Desenfoque cinematográfico extremo */
+@keyframes cinematicDeepBlur {
+  0% {
+    filter: blur(2px) brightness(1);
+  }
+  50% {
+    filter: blur(6px) brightness(0.95);
+  }
+  100% {
+    filter: blur(12px) brightness(0.85);
+  }
+}
+
+/* Blur profundo con efecto de movimiento */
+@keyframes motionBlurEffect {
+  0% {
+    filter: blur(0) saturate(100%);
+  }
+  50% {
+    filter: blur(4px) saturate(85%);
+  }
+  100% {
+    filter: blur(8px) saturate(70%);
+  }
+}
+
+/* Enfoque nítido con blur de fondo */
+@keyframes sharpFocusBlur {
+  0% {
+    filter: blur(8px);
+    opacity: 0.7;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+/* Transición suave de blur + zoom */
+@keyframes blurZoomTransition {
+  0% {
+    filter: blur(12px);
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  50% {
+    filter: blur(6px);
+    transform: scale(0.98);
+  }
+  100% {
+    filter: blur(0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Blur direccional según scroll */
+@keyframes directionalBlur {
+  0% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+  50% {
+    filter: blur(4px) brightness(0.95);
+    opacity: 0.9;
+  }
+  100% {
+    filter: blur(10px) brightness(0.85);
+    opacity: 0.7;
+  }
+}
+
+/* ---------- Estado inicial (oculto) de los elementos con scroll-reveal ----------
+   GSAP anima estas mismas propiedades desde estos valores hasta su estado
+   final visible. Si por algún motivo los scripts no llegaran a ejecutarse,
+   js/animations.js tiene un respaldo que fuerza la visibilidad. */
+.reveal, .news-card, .grid-card {
+  opacity: 0;
+}
+.reveal { translate: 0 34px; filter: blur(12px); }
+.news-card, .grid-card { translate: 0 30px; scale: .96; filter: blur(14px); position: relative; }
+
+/* Estado inicial del texto del hero (la línea de tiempo de entrada vive en
+   js/animations.js, impulsada por GSAP) */
+.hero-logo, .hero-eyebrow, .hero-title, .hero-subtitle { opacity: 0; }
+
+.section-heading .section-title { background-size: 200% 100%; }
+.section-heading.gsap-revealed .section-title {
+  animation: titleShimmer 1.4s var(--ease-out) .15s both;
+}
+
+/* ---------- Brillo diagonal al pasar el mouse sobre las imágenes ----------
+   Vive en el contenedor de imagen (que sí tiene overflow:hidden), no en
+   la tarjeta completa, para que quede bien recortado por las esquinas
+   redondeadas. */
+.news-card-media, .grid-card-media { position: relative; }
+.news-card-media::before, .grid-card-media::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.news-card:hover .news-card-media::before,
+.grid-card:hover .grid-card-media::before {
+  opacity: 1;
+  animation: imageBrillo .9s ease-in-out;
+}
+.news-card:hover .news-card-media img,
+.grid-card:hover .grid-card-media img {
+  filter: brightness(1.08);
+}
+
+/* ---------- Brillo pulsante del título del hero (activado tras la intro de GSAP) ---------- */
+.hero-title { position: relative; }
+.hero-title.active { animation: textGlow 3.5s ease-in-out infinite; }
+
+/* ---------- Respeto por preferencias de movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .news-card, .grid-card {
+    opacity: 1 !important;
+    translate: 0 0 !important;
+    scale: 1 !important;
+    filter: none !important;
+  }
+  .hero-slide { filter: none !important; transform: none !important; }
+  .hero-arrow, .hero-dot, .hero-title { animation: none !important; }
+  .hero-logo, .hero-eyebrow, .hero-title, .hero-subtitle { opacity: 1 !important; }
+}
+
+/* ---------- Estilos para efectos avanzados de scroll ---------- */
+
+/* Encabezados brillantes al entrar en viewport */
+.section-heading.glowing-header .section-title {
+  animation: sectionShimmer 2s var(--ease-out) forwards;
+  background-size: 200% 100%;
+  background-position: -100% 0;
+}
+
+/* Mejorada revelación de tarjetas */
+.news-card, .grid-card {
+  transition: box-shadow .3s var(--ease-out);
+}
+
+.news-card.gsap-revealed,
+.grid-card.gsap-revealed {
+  box-shadow: 0 20px 40px rgba(138, 43, 255, 0.15);
+}
+
+.news-card.gsap-revealed:hover,
+.grid-card.gsap-revealed:hover {
+  box-shadow: 0 30px 60px rgba(41, 231, 240, 0.25);
+}
+
+/* Efecto de profundidad en sections */
+.section {
+  position: relative;
+}
+
+.section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s var(--ease-out);
+  background: radial-gradient(circle at 50% 0%, rgba(41, 231, 240, 0.1), transparent 80%);
+}
+
+/* Hover state con depth */
+.reveal {
+  position: relative;
+}
+
+.reveal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  background: rgba(41, 231, 240, 0.05);
+  transition: opacity .3s var(--ease-out);
+  pointer-events: none;
+}
+
+.reveal:hover::after {
+  opacity: 1;
+}
+
+/* ---------- ESTILOS AVANZADOS PARA DESENFOQUE EN SCROLL ---------- */
+
+/* Aplicar blur progresivo a secciones */
+.section.blur-active {
+  animation: progressiveBlurIn .8s var(--ease-out) forwards;
+}
+
+/* Tarjetas con blur de transición */
+.news-card.blur-transition,
+.grid-card.blur-transition {
+  animation: blurZoomTransition .9s var(--ease-out) forwards;
+}
+
+/* Elementos con blur cinemático */
+.cinematic-blur {
+  animation: cinematicDeepBlur 1.2s var(--ease-out) forwards;
+}
+
+/* Blur de movimiento en elementos dinámicos */
+.motion-blur {
+  animation: motionBlurEffect .7s ease-in-out forwards;
+}
+
+/* Enfoque nítido desde blur */
+.sharp-focus {
+  animation: sharpFocusBlur 1s var(--ease-out) forwards;
+}
+
+/* Blur direccional para elementos salientes */
+.directional-blur {
+  animation: directionalBlur 1.5s ease-out forwards;
+}
+
+/* Acceso rápido a blur value en elementos */
+.blur-light {
+  filter: blur(2px);
+  opacity: 0.95;
+}
+
+.blur-medium {
+  filter: blur(6px);
+  opacity: 0.85;
+}
+
+.blur-heavy {
+  filter: blur(12px);
+  opacity: 0.7;
+}
+
+.blur-extreme {
+  filter: blur(20px);
+  opacity: 0.5;
+}
+
+/* Blur + saturación reducida */
+.blur-desaturated {
+  filter: blur(8px) saturate(60%);
+  opacity: 0.75;
+}
+
+/* Blur con efecto de proximidad (más borroso = más lejano) */
+.blur-proximity {
+  transition: filter .2s ease-out, opacity .2s ease-out;
+}
+
+/* Estado de blur en entrada de viewport */
+.blur-on-entrance {
+  animation: progressiveBlurIn 1s var(--ease-out) forwards;
+}

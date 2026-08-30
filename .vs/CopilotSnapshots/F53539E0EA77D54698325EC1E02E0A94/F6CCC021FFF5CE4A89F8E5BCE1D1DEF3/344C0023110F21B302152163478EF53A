@@ -1,0 +1,131 @@
+﻿/* ============================================================
+   TOMORROWLAND 2026 — ANIMACIONES
+   ============================================================
+   El scroll-reveal, el parallax y la línea de tiempo del hero
+   ahora los controla GSAP + ScrollTrigger desde js/animations.js
+   (ver ese archivo). Por eso aquí NO hay `transition` en las
+   propiedades que GSAP anima directamente (opacity/translate/
+   scale/filter) — mezclar una transición CSS con un tween de
+   GSAP sobre la misma propiedad genera tirones. Lo que sí vive
+   en este archivo son los estados iniciales/de respaldo y las
+   animaciones puramente decorativas (pulsos, brillos, etc.).
+   ============================================================ */
+
+/* Cue de scroll en el hero (respaldo si Lottie no carga) */
+@keyframes scrollCue {
+  0%   { transform: translate(-50%, 0);   opacity: 1; }
+  70%  { opacity: .2; }
+  100% { transform: translate(-50%, 16px); opacity: 0; }
+}
+
+/* Pulsación de las flechas del hero */
+@keyframes arrowPulseEnhanced {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(41, 231, 240, 0.4); transform: translateY(-50%) scale(1); }
+  50%      { box-shadow: 0 0 0 12px rgba(41, 231, 240, 0); transform: translateY(-50%) scale(1.05); }
+}
+
+/* Entrada con bounce del indicador activo del hero */
+@keyframes dotPulse {
+  0%   { transform: scale(0.8); opacity: 0; }
+  60%  { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Barra de progreso del indicador activo del hero */
+@keyframes dotFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Brillo que recorre el título de sección la primera vez que aparece (GSAP dispara la clase) */
+@keyframes titleShimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 130% 50%; }
+}
+
+/* Brillo diagonal deslizante sobre imágenes al pasar el mouse */
+@keyframes imageBrillo {
+  0%   { left: -60%; }
+  100% { left: 120%; }
+}
+
+/* Brillo pulsante en el texto del título del hero */
+@keyframes textGlow {
+  0%, 100% { text-shadow: 0 0 10px rgba(138, 43, 255, 0.3); }
+  50%      { text-shadow: 0 0 30px rgba(41, 231, 240, 0.6); }
+}
+
+/* Respaldo de ripple si Anime.js no está disponible (ver css/styles.css .btn-ripple) */
+@keyframes rippleExpandFallback {
+  0%   { transform: scale(0); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ---------- Estado inicial (oculto) de los elementos con scroll-reveal ----------
+   GSAP anima estas mismas propiedades desde estos valores hasta su estado
+   final visible. Si por algún motivo los scripts no llegaran a ejecutarse,
+   js/animations.js tiene un respaldo que fuerza la visibilidad. */
+.reveal, .news-card, .grid-card {
+  opacity: 0;
+}
+.reveal { translate: 0 34px; filter: blur(12px); }
+.news-card, .grid-card { translate: 0 30px; scale: .96; filter: blur(14px); position: relative; }
+
+/* Estado inicial del texto del hero (la línea de tiempo de entrada vive en
+   js/animations.js, impulsada por GSAP) */
+.hero-logo, .hero-eyebrow, .hero-title, .hero-subtitle { opacity: 0; }
+
+.section-heading .section-title { background-size: 200% 100%; }
+.section-heading.gsap-revealed .section-title {
+  animation: titleShimmer 1.4s var(--ease-out) .15s both;
+}
+
+/* ---------- Brillo diagonal al pasar el mouse sobre las imágenes ----------
+   Vive en el contenedor de imagen (que sí tiene overflow:hidden), no en
+   la tarjeta completa, para que quede bien recortado por las esquinas
+   redondeadas. */
+.news-card-media, .grid-card-media { position: relative; }
+.news-card-media::before, .grid-card-media::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.25), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+.news-card:hover .news-card-media::before,
+.grid-card:hover .grid-card-media::before {
+  opacity: 1;
+  animation: imageBrillo .9s ease-in-out;
+}
+.news-card:hover .news-card-media img,
+.grid-card:hover .grid-card-media img {
+  filter: brightness(1.08);
+}
+
+/* ---------- Brillo pulsante del título del hero (activado tras la intro de GSAP) ---------- */
+.hero-title { position: relative; }
+.hero-title.active { animation: textGlow 3.5s ease-in-out infinite; }
+
+/* ---------- Respeto por preferencias de movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; scroll-snap-type: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal, .news-card, .grid-card {
+    opacity: 1 !important;
+    translate: 0 0 !important;
+    scale: 1 !important;
+    filter: none !important;
+  }
+  .hero-slide { filter: none !important; transform: none !important; }
+  .hero-arrow, .hero-dot, .hero-title { animation: none !important; }
+  .hero-logo, .hero-eyebrow, .hero-title, .hero-subtitle { opacity: 1 !important; }
+}

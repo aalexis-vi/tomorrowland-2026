@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomorrowland Brasil 2027 | Tomorrowland</title>
+  <meta name="description" content="Tomorrowland Brasil 2027 — la próxima edición en Itu, São Paulo. Fechas y line-up por confirmar: entérate primero cuando se anuncien.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/icons/favicon-180.png">
+
+  <meta property="og:title" content="Tomorrowland Brasil 2027">
+  <meta property="og:image" content="../assets/images/general/social-share.jpg">
+
+  <link rel="stylesheet" href="../assets/vendor/animate-css/animate.min.css">
+  <link rel="stylesheet" href="../assets/vendor/lenis/lenis.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/pages.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="tl-goo">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur" />
+        <feColorMatrix in="blur" mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10" result="goo" />
+        <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="../index.html#inicio" class="logo" aria-label="Tomorrowland — inicio">
+        <span class="logo-mark" aria-hidden="true"></span>
+        <span class="logo-text">Tomorrowland</span>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="../index.html#inicio" class="nav-link">Inicio</a></li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle" aria-expanded="false">Festival <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="../festival/belgica.html" class="dropdown-link">Tomorrowland Bélgica</a>
+              <a href="../festival/brasil.html" class="dropdown-link">Tomorrowland Brasil</a>
+              <a href="../index.html#radio" class="dropdown-link">Estación de Radio</a>
+            </div>
+          </li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle active" aria-expanded="false">Eventos <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="belgica-2026.html" class="dropdown-link">Bélgica 2026</a>
+              <a href="brasil-2027.html" class="dropdown-link active" aria-current="page">Brasil 2027</a>
+            </div>
+          </li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle" aria-expanded="false">Música <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="../musica/sets-videos.html" class="dropdown-link">Sets y videos</a>
+              <a href="../index.html#radio" class="dropdown-link">Estación de Radio</a>
+            </div>
+          </li>
+
+          <li class="nav-item has-dropdown">
+            <button class="nav-link nav-toggle" aria-expanded="false">Tienda <span class="caret" aria-hidden="true"></span></button>
+            <div class="dropdown">
+              <a href="#" class="dropdown-link">Merchandise</a>
+              <a href="#" class="dropdown-link">Entradas</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="mobile-nav-list">
+        <li><a href="../index.html#inicio" class="mobile-link">Inicio</a></li>
+        <li class="mobile-accordion">
+          <button class="mobile-accordion-toggle">Festival</button>
+          <div class="mobile-accordion-panel">
+            <a href="../festival/belgica.html" class="mobile-sublink">Tomorrowland Bélgica</a>
+            <a href="../festival/brasil.html" class="mobile-sublink">Tomorrowland Brasil</a>
+            <a href="../index.html#radio" class="mobile-sublink">Estación de Radio</a>
+          </div>
+        </li>
+        <li class="mobile-accordion open">
+          <button class="mobile-accordion-toggle">Eventos</button>
+          <div class="mobile-accordion-panel">
+            <a href="belgica-2026.html" class="mobile-sublink">Bélgica 2026</a>
+            <a href="brasil-2027.html" class="mobile-sublink active" aria-current="page">Brasil 2027</a>
+          </div>
+        </li>
+        <li class="mobile-accordion">
+          <button class="mobile-accordion-toggle">Música</button>
+          <div class="mobile-accordion-panel">
+            <a href="../musica/sets-videos.html" class="mobile-sublink">Sets y videos</a>
+            <a href="../index.html#radio" class="mobile-sublink">Estación de Radio</a>
+          </div>
+        </li>
+        <li class="mobile-accordion">
+          <button class="mobile-accordion-toggle">Tienda</button>
+          <div class="mobile-accordion-panel">
+            <a href="#" class="mobile-sublink">Merchandise</a>
+            <a href="#" class="mobile-sublink">Entradas</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="inicio">
+
+    <nav class="breadcrumb" aria-label="Ruta de navegación">
+      <a href="../index.html#inicio">Inicio</a>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span>Eventos</span>
+      <span class="breadcrumb-sep" aria-hidden="true">/</span>
+      <span class="breadcrumb-current" aria-current="page">Brasil 2027</span>
+    </nav>
+
+    <!-- ============================================================
+         BANNER DEL EVENTO
+         ============================================================ -->
+    <section class="page-hero page-hero--eventos-brasil">
+      <div class="page-hero-overlay" aria-hidden="true"></div>
+      <div class="page-hero-content section-inner reveal">
+        <span class="section-eyebrow">Itu · São Paulo · Fecha por confirmar</span>
+        <h1 class="section-title">Tomorrowland Brasil <span>2027</span></h1>
+        <p class="page-hero-subtitle">La próxima edición brasileña ya se prepara. Fechas, entradas y line-up se anunciarán próximamente en los canales oficiales — quédate cerca para no perdértelo.</p>
+
+        <div class="quick-facts">
+          <div class="quick-fact">
+            <span class="quick-fact-label">Fechas</span>
+            <span class="quick-fact-value">Por anunciar</span>
+          </div>
+          <div class="quick-fact">
+            <span class="quick-fact-label">Lugar</span>
+            <span class="quick-fact-value">Itu, São Paulo</span>
+          </div>
+          <div class="quick-fact">
+            <span class="quick-fact-label">Entradas</span>
+            <span class="quick-fact-value">Próximamente</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         AVISO — EDICIÓN AÚN NO ANUNCIADA
+         ============================================================ -->
+    <section class="section section-brazil js-blur-on-scroll">
+      <div class="section-inner">
+        <div class="section-heading reveal">
+          <span class="section-eyebrow">Save the date</span>
+          <h2 class="section-title">Lo que sabemos hasta ahora</h2>
+        </div>
+
+        <div class="notice-box reveal">
+          <span class="notice-box-icon" aria-hidden="true">📅</span>
+          <p>Tomorrowland Brasil 2027 todavía no tiene fechas ni line-up confirmados de forma oficial. En cuanto se anuncien, esta página se actualizará — mientras tanto, puedes revivir la energía de ediciones anteriores en la sección <a href="../festival/brasil.html">Tomorrowland Brasil</a>.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <span class="feature-card-icon" aria-hidden="true">📍</span>
+            <h3 class="feature-card-title">Mismo hogar</h3>
+            <p class="feature-card-desc">La edición 2027 se celebrará nuevamente en Itu, a las afueras de São Paulo.</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-card-icon" aria-hidden="true">🎨</span>
+            <h3 class="feature-card-title">Nueva escenografía</h3>
+            <p class="feature-card-desc">Como en cada edición, el escenario principal se diseñará por completo desde cero.</p>
+          </article>
+          <article class="feature-card reveal">
+            <span class="feature-card-icon" aria-hidden="true">🔔</span>
+            <h3 class="feature-card-title">Entérate primero</h3>
+            <p class="feature-card-desc">Sigue los canales oficiales de Tomorrowland para conocer las novedades apenas se confirmen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         LISTA DE ESPERA (PLACEHOLDER)
+         ============================================================ -->
+    <section class="section section-radio js-blur-on-scroll">
+      <div class="section-inner">
+        <div class="ticket-grid ticket-grid--single">
+          <article class="ticket-card is-featured reveal">
+            <span class="ticket-card-badge">Notificación</span>
+            <h3 class="ticket-card-title">Sé el primero en enterarte</h3>
+            <p class="ticket-card-desc">Deja tu registro para recibir un aviso apenas se confirmen las fechas y la venta de entradas.</p>
+            <ul class="ticket-card-list">
+              <li>Aviso de fechas oficiales</li>
+              <li>Alerta de apertura de venta de entradas</li>
+              <li>Primeras noticias del line-up</li>
+            </ul>
+            <a class="btn" href="#">Notificarme</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-belgium js-blur-on-scroll section--cta">
+      <div class="section-inner">
+        <div class="cta-row reveal">
+          <a class="btn" href="../festival/brasil.html">Conocer Tomorrowland Brasil <span class="btn-arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href="belgica-2026.html">Ver Tomorrowland Bélgica 2026</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="../index.html#inicio" class="logo logo--footer" aria-label="Tomorrowland — inicio">
+          <span class="logo-mark" aria-hidden="true"></span>
+          <span class="logo-text">Tomorrowland</span>
+        </a>
+        <p class="footer-tagline">A festival of dreams, music &amp; unity.</p>
+      </div>
+
+      <nav class="footer-links" aria-label="Enlaces del sitio">
+        <div class="footer-col">
+          <h3 class="footer-col-title">Festival</h3>
+          <a href="../festival/belgica.html">Tomorrowland Bélgica</a>
+          <a href="../festival/brasil.html">Tomorrowland Brasil</a>
+          <a href="../index.html#radio">Estación de Radio</a>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-col-title">Explorar</h3>
+          <a href="../musica/sets-videos.html">Música</a>
+          <a href="#">Tienda</a>
+          <a href="../index.html#inicio">Inicio</a>
+        </div>
+      </nav>
+
+      <div class="footer-social">
+        <h3 class="footer-col-title">Síguenos</h3>
+        <div class="social-icons">
+          <a href="#" class="social-icon" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 8h2V5h-2c-2.2 0-4 1.8-4 4v2H9v3h2v7h3v-7h2.5l.5-3H14V9c0-.6.4-1 1-1z"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="6" width="19" height="12" rx="3"/><path d="M10.5 9.5l5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 4v9.5a3.2 3.2 0 1 1-2.4-3.1"/><path d="M14 4c.4 2 2 3.6 4 4"/></svg>
+          </a>
+          <a href="#" class="social-icon" aria-label="X / Twitter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4l16 16M20 4L4 20"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="footerYear"></span> Tomorrowland. Todos los derechos reservados. Sitio de fans — proyecto de demostración.</p>
+    </div>
+  </footer>
+
+  <script src="../assets/vendor/gsap/gsap.min.js"></script>
+  <script src="../assets/vendor/gsap/ScrollTrigger.min.js"></script>
+  <script src="../assets/vendor/anime/anime.min.js"></script>
+  <script src="../assets/vendor/lottie/lottie.min.js"></script>
+  <script src="../assets/vendor/lenis/lenis.min.js"></script>
+
+  <script src="../js/smooth-scroll.js"></script>
+  <script src="../js/navigation.js"></script>
+  <script src="../js/carousel.js"></script>
+  <script src="../js/animations.js"></script>
+  <script src="../js/effects.js"></script>
+  <script src="../js/video.js"></script>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>

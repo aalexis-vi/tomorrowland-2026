@@ -1,0 +1,69 @@
+/* ============================================================
+   TOMORROWLAND 2026 — RESPONSIVE
+   ============================================================ */
+
+/* ---------- Tablets (≤ 1024px) ---------- */
+@media (max-width: 1024px) {
+  .main-nav { display: none; }
+  .hamburger { display: flex; }
+  .mobile-menu { display: block; }
+
+  .video-layout { grid-template-columns: 1fr; }
+  .video-text { order: -1; }
+
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .footer-social { grid-column: 1 / -1; }
+}
+
+/* ---------- Tablets pequeñas / móviles grandes (≤ 768px) ---------- */
+@media (max-width: 768px) {
+  .section { padding: 88px 0; }
+  .section-inner { padding: 0 22px; }
+  .header-inner { padding: 0 20px; }
+
+  .hero-arrow { width: 42px; height: 42px; margin-top: -21px; font-size: 1.3rem; }
+  .hero-arrow-prev { left: 12px; }
+  .hero-arrow-next { right: 12px; }
+  .hero-dots { bottom: 78px; }
+
+  /* Una tarjeta completa por "página" en vez de 2: a este ancho no entran
+     dos sin achicarlas demasiado, así que se muestra solo una — entera,
+     nunca una segunda asomando a medias. */
+  .card-carousel { max-width: none; margin: 0; }
+  .news-card, .grid-card { flex: 0 0 100%; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 36px; padding-bottom: 40px; }
+  .footer-links { gap: 32px; }
+}
+
+/* ---------- Móviles (≤ 480px) ---------- */
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(2.6rem, 15vw, 4.5rem); }
+  .hero-subtitle { letter-spacing: .2em; }
+  .hero-content { padding: 0 16px; }
+
+  .section-title { font-size: clamp(2rem, 8vw, 2.8rem); }
+
+  .video-frame-glow { display: none; }
+
+  .footer-links { flex-direction: column; gap: 20px; }
+}
+
+/* ---------- Pantallas bajas (celular en horizontal, ventanas de
+   navegador poco altas en desktop) ----------
+   El hero fuerza min-height:560px para que nunca se vea aplastado en
+   desktop, pero eso mismo hace que en un viewport de ~375-480px de
+   alto (un celular acostado) el subtítulo, los puntos y la flecha de
+   scroll queden cortados en la primera vista, sin haber scrolleado
+   nada todavía. Se independiza del ancho: usa max-height, no max-width. */
+@media (max-height: 480px) {
+  .hero { min-height: 380px; }
+  .hero-logo { width: 40px; height: 40px; margin-bottom: 10px; }
+  .hero-eyebrow { margin-bottom: 8px; }
+  .hero-subtitle { margin-top: 6px; }
+  .hero-dots { bottom: 14px; }
+  .scroll-cue { display: none; } /* no hay espacio para invitar a más scroll Y a la vez mostrar el resto del hero */
+}
+
+/* Evitar overflow horizontal en cualquier resolución */
+html, body { max-width: 100%; overflow-x: hidden; }

@@ -1,0 +1,288 @@
+﻿/* ============================================================
+   ANIMATIONS.JS
+   Motor de animación del sitio. Usa:
+   - GSAP + ScrollTrigger → línea de tiempo de entrada del hero,
+     profundidad/blur del hero al hacer scroll, aparición de
+     secciones y tarjetas, y parallax de imágenes.
+   - Anime.js               → inclinación 3D ("tilt") de las
+     tarjetas al pasar el mouse.
+   - Lottie                 → indicador animado de "scroll" en
+     el hero.
+   Si alguna librería no llega a cargar (por ejemplo, sin
+   conexión y sirviendo el sitio desde una ruta rota), el código
+   cae a un respaldo simple que deja todo visible y funcional.
+   ============================================================ */
+
+(function () {
+  'use strict';
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+  const hasGSAP = !prefersReducedMotion && typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
+  const hasAnime = !prefersReducedMotion && hasFinePointer && typeof window.anime !== 'undefined';
+
+  if (hasGSAP) {
+    gsap.registerPlugin(ScrollTrigger);
+  }
+
+  /* ---------- Respaldo: si GSAP no está disponible, todo queda visible ---------- */
+  function revealEverythingInstantly() {
+    document.querySelectorAll('.reveal, .news-card, .grid-card, .hero-logo, .hero-eyebrow, .hero-title, .hero-subtitle')
+      .forEach((el) => {
+        el.style.opacity = '1';
+        el.style.filter = 'none';
+        el.style.translate = '0 0';
+        el.style.scale = '1';
+      });
+  }
+
+  /* ---------- 1. Línea de tiempo de entrada del hero (GSAP) ---------- */
+  function initHeroIntro() {
+    if (!hasGSAP) return;
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .to('.hero-logo',     { opacity: 1, duration: .7 })
+      .to('.hero-eyebrow',  { opacity: 1, duration: .6 }, '-=.4')
+      .to('.hero-title',    { opacity: 1, duration: .8 }, '-=.35')
+      .to('.hero-subtitle', { opacity: 1, duration: .6 }, '-=.45')
+      .call(() => {
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle) heroTitle.classList.add('active');
+      });
+  }
+
+  /* ---------- 2. Profundidad del hero al hacer scroll (GSAP ScrollTrigger, scrub) ---------- */
+  function initHeroScrollEffect() {
+    if (!hasGSAP) return;
+    const hero = document.getElementById('hero');
+    const heroTrack = document.getElementById('heroTrack');
+    const heroContent = document.querySelector('.hero-content');
+    if (!hero || !heroTrack || !heroContent) return;
+
+    const trigger = { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.4 };
+
+    gsap.to(heroContent, { y: 70, opacity: 0, ease: 'none', scrollTrigger: trigger });
+    gsap.to(heroTrack, {
+      y: 110,
+      filter: 'blur(7px) brightness(0.85)',
+      ease: 'none',
+      scrollTrigger: trigger
+    });
+  }
+
+  /* ---------- 2.1 Respiro continuo y fluido de la imagen activa del hero ----------
+     Un zoom muy sutil de ida y vuelta (independiente del paneo CSS, que vive en el
+     contenedor .hero-slide) para que el hero nunca se sienta "congelado", incluso
+     después de que termina el paneo de 12s. */
+  function initHeroBreathing() {
+    if (!hasGSAP) return;
+    const heroTrack = document.getElementById('heroTrack');
+    if (!heroTrack) return;
+
+    gsap.to(heroTrack.querySelectorAll('.hero-slide img'), {
+      scale: 1.025,
+      duration: 6,
+      ease: 'sine.inOut',
+      repeat: -1,
+      yoyo: true
+    });
+  }
+
+  /* ---------- 3. Aparición de secciones y tarjetas al hacer scroll (GSAP ScrollTrigger) ---------- */
+  function initHeadingReveal() {
+    if (!hasGSAP) return;
+    gsap.utils.toArray('.reveal').forEach((el) => {
+      gsap.to(el, {
+        opacity: 1, y: 0, filter: 'blur(0px)',
+        duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%' },
+        onStart: () => el.classList.add('gsap-revealed')
+      });
+    });
+  }
+
+  /* ---------- 3.1 Efecto adicional de brillo en encabezados (ScrollTrigger) ---------- */
+  function initEnhancedHeaderEffects() {
+    if (!hasGSAP) return;
+    gsap.utils.toArray('.section-heading').forEach((heading) => {
+      gsap.to(heading, {
+        scrollTrigger: {
+          trigger: heading,
+          start: 'top 80%',
+          onEnter: () => heading.classList.add('glowing-header'),
+          once: true
+        }
+      });
+    });
+  }
+
+  /* ---------- 3.2 Efecto de transformación suave en scroll (ScrollTrigger scrub) ---------- */
+  function initSectionParallaxEffect() {
+    if (!hasGSAP) return;
+    gsap.utils.toArray('.section').forEach((section) => {
+      const innerContent = section.querySelector('.section-inner');
+      if (!innerContent) return;
+
+      gsap.to(innerContent, {
+        y: 30,
+        opacity: 0.95,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 60%',
+          end: 'bottom 40%',
+          scrub: 0.8,
+          markers: false
+        }
+      });
+    });
+  }
+
+  // Guarda qué contenedores de tarjetas ya tienen su ScrollTrigger montado,
+  // para poder volver a llamarse desde refresh() sin duplicar animaciones.
+  const cardContainersDone = new Set();
+
+  function initCardReveal() {
+    if (!hasGSAP) return;
+    ['#belgiumTrack', '#brazilGrid', '#radioGrid'].forEach((selector) => {
+      const container = document.querySelector(selector);
+      if (!container || cardContainersDone.has(selector)) return;
+
+      const cards = container.querySelectorAll('.news-card, .grid-card');
+      if (!cards.length) return;
+
+      cardContainersDone.add(selector);
+
+      ScrollTrigger.batch(cards, {
+        start: 'top 90%',
+        once: true,
+        onEnter: (batch) => {
+          gsap.to(batch, {
+            opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+            duration: .8, ease: 'power3.out', stagger: .12, overwrite: true
+          });
+        }
+      });
+    });
+  }
+
+  /* ---------- 4. Parallax suave en imágenes y elementos decorativos (GSAP scrub) ---------- */
+  const parallaxDone = new WeakSet();
+
+  function initParallax() {
+    if (!hasGSAP) return;
+    document.querySelectorAll('.js-parallax').forEach((el) => {
+      if (parallaxDone.has(el)) return;
+      parallaxDone.add(el);
+
+      const speed = parseFloat(el.dataset.speed || '0.08');
+      const range = Math.min(80, 500 * speed);
+
+      gsap.fromTo(el,
+        { y: -range },
+        {
+          y: range, ease: 'none',
+          scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 0.5 }
+        }
+      );
+    });
+  }
+
+  /* ---------- 5. Inclinación 3D ("tilt") de las tarjetas al pasar el mouse (Anime.js) ---------- */
+  function initCardTilt() {
+    if (prefersReducedMotion || !hasFinePointer) return;
+
+    const STRENGTH = 9; // grados máximos de inclinación
+
+    function attach(card) {
+      if (card.dataset.tiltBound) return;
+      card.dataset.tiltBound = 'true';
+
+      card.addEventListener('pointermove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        const rotateX = (-py * STRENGTH).toFixed(2);
+        const rotateY = (px * STRENGTH).toFixed(2);
+
+        if (hasAnime) {
+          anime.animate(card, {
+            rotateX: `${rotateX}deg`,
+            rotateY: `${rotateY}deg`,
+            translateY: -10,
+            scale: 1.02,
+            duration: 400,
+            ease: 'outQuad'
+          });
+        } else {
+          card.style.transform =
+            `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px) scale(1.02)`;
+        }
+      });
+
+      card.addEventListener('pointerleave', () => {
+        if (hasAnime) {
+          anime.animate(card, {
+            rotateX: '0deg', rotateY: '0deg', translateY: 0, scale: 1,
+            duration: 600, ease: 'outElastic(1, .6)'
+          });
+        } else {
+          card.style.transform = '';
+        }
+      });
+    }
+
+    document.querySelectorAll('.news-card, .grid-card').forEach(attach);
+  }
+
+  /* ---------- 6. Indicador de scroll animado con Lottie ---------- */
+  function initScrollCueLottie() {
+    const container = document.getElementById('scrollCueLottie');
+    const wrapper = document.querySelector('.scroll-cue');
+    if (!container || !wrapper) return;
+
+    const player = window.lottie || window.bodymovin;
+    if (!player || prefersReducedMotion) {
+      wrapper.classList.add('lottie-unavailable');
+      return;
+    }
+
+    try {
+      player.loadAnimation({
+        container,
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: 'assets/lottie/scroll-cue.json'
+      });
+    } catch (err) {
+      wrapper.classList.add('lottie-unavailable');
+    }
+  }
+
+  // API pública: main.js llama a esto después de inyectar tarjetas dinámicas.
+  window.TomorrowlandAnimations = {
+    refresh() {
+      initCardReveal();
+      initParallax();
+      initCardTilt();
+      if (hasGSAP) ScrollTrigger.refresh();
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!hasGSAP) {
+      revealEverythingInstantly();
+    } else {
+      initHeroIntro();
+      initHeroScrollEffect();
+      initHeroBreathing();
+      initHeadingReveal();
+      initEnhancedHeaderEffects();
+      initSectionParallaxEffect();
+    }
+    initCardReveal();
+    initParallax();
+    initCardTilt();
+    initScrollCueLottie();
+  });
+})();
