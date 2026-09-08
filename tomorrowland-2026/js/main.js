@@ -239,5 +239,10 @@
     if (window.TomorrowlandEffects) {
       window.TomorrowlandEffects.refreshCoverflow();
     }
+    // Ídem para el modal de tarjetas: hay que enganchar el clic también
+    // en las tarjetas recién creadas (ver js/card-modal.js).
+    if (window.TomorrowlandCardModal) {
+      window.TomorrowlandCardModal.refresh();
+    }
   });
 })();

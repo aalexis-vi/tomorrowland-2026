@@ -183,12 +183,19 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px; height: 44px;
+  width: 52px; height: 52px;
   margin-bottom: 18px;
   border-radius: 50%;
   background: var(--gradient-aurora);
   font-size: 1.1rem;
 }
+/* Ícono de Font Awesome dentro de la insignia, inyectado como SVG en línea
+   (el trazo real del ícono, tomado de fontawesome.com) en vez del emoji
+   multicolor e inconsistente del sistema operativo. Va como SVG en línea y
+   no como icon-font (@font-face): así se ve igual de nítido tanto si la
+   página se abre con doble clic (file://) como en un servidor, sin
+   depender de que el navegador permita cargar la fuente de íconos. */
+.feature-card-icon svg { width: 26px; height: 26px; fill: var(--color-text); }
 .feature-card-title { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 10px; }
 .feature-card-desc { font-size: .92rem; color: var(--color-text-muted); line-height: 1.6; }
 
@@ -202,7 +209,8 @@
   border: 1px solid var(--color-border);
   border-left: 3px solid var(--accent-gold);
 }
-.notice-box-icon { flex-shrink: 0; font-size: 1.2rem; }
+.notice-box-icon { flex-shrink: 0; display: inline-flex; }
+.notice-box-icon svg { width: 24px; height: 24px; fill: var(--accent-gold); margin-top: 2px; }
 .notice-box p { font-size: .88rem; color: var(--color-text-muted); line-height: 1.6; }
 .notice-box strong { color: var(--color-text); }
 .notice-box a { color: var(--accent-cyan); }

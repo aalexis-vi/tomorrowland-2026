@@ -204,7 +204,16 @@
      tween encima: eso es lo que causaba los tirones del efecto anterior).
      La sección se desenfoca y se atenúa suavemente solo mientras se retira
      por arriba, y vuelve a estar perfectamente nítida en cuanto está en
-     pantalla — así el blur se siente como profundidad, no como ruido. */
+     pantalla — así el blur se siente como profundidad, no como ruido.
+
+     Importante: el disparador usa el borde INFERIOR de la sección, no el
+     superior. Las secciones son más altas que la pantalla, así que si el
+     desenfoque dependiera del borde superior (como antes) se activaría en
+     cuanto la sección empezara a asomar por arriba — es decir, mientras su
+     contenido (el video, las tarjetas, etc.) todavía es el protagonista en
+     pantalla. Usando el borde inferior, el blur solo entra cuando la sección
+     ya terminó de mostrarse y está a punto de desaparecer del todo, dejando
+     el contenido "objetivo" siempre nítido mientras se está viendo. */
   function initSectionDepthEffect() {
     if (!hasGSAP) return;
     gsap.utils.toArray('.js-blur-on-scroll').forEach((section) => {
@@ -216,8 +225,8 @@
           ease: 'none',
           scrollTrigger: {
             trigger: section,
-            start: 'top 8%',
-            end: 'top -35%',
+            start: 'bottom 55%',
+            end: 'bottom 0%',
             scrub: 0.6
           }
         }

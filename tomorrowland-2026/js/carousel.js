@@ -231,6 +231,7 @@
     let moved = false;
     let startX = 0;
     let scrollStart = 0;
+    let pointerId = null;
 
     track.addEventListener('pointerdown', (e) => {
       if (e.pointerType === 'touch') return; // el táctil ya hace scroll nativo
@@ -238,14 +239,28 @@
       moved = false;
       startX = e.clientX;
       scrollStart = track.scrollLeft;
-      track.classList.add('is-dragging');
-      track.setPointerCapture(e.pointerId);
+      pointerId = e.pointerId;
+      // Sin track.setPointerCapture() aquí a propósito (ver nota en pointermove).
     });
 
     track.addEventListener('pointermove', (e) => {
       if (!isDown) return;
       const delta = e.clientX - startX;
-      if (Math.abs(delta) > 4) moved = true;
+      if (!moved && Math.abs(delta) > 4) {
+        moved = true;
+        // Recién ahora que el movimiento confirma que es un arrastre de
+        // verdad se marca como "dragging" y se captura el puntero. Si se
+        // capturara ya en pointerdown (como antes), CUALQUIER clic simple
+        // dentro del track — sin arrastre, cero movimiento — redirige su
+        // pointerup/mouseup/click al propio .card-track en vez de a la
+        // tarjeta bajo el cursor (así lo exige la spec de Pointer Events
+        // para un elemento con el puntero capturado), y el clic nunca
+        // llega a la tarjeta ni a su enlace "Ver más". Ese era el motivo
+        // real por el que las tarjetas y su modal (ver js/card-modal.js)
+        // no respondían al clic.
+        track.classList.add('is-dragging');
+        track.setPointerCapture(pointerId);
+      }
       track.scrollLeft = scrollStart - delta;
     });
 
