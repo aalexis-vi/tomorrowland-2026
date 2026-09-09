@@ -51,33 +51,36 @@
   const brazilNews = [
     {
       image: 'assets/images/brazil/brazil-1.jpg',
-      tag: 'Tomorrowland Brasil',
+      tag: 'Espectáculo de drones',
       title: 'El emblema de Tomorrowland toma forma en el cielo',
       description: 'Cientos de drones dibujan el logo del festival sobre el escenario principal, acompañados de fuegos artificiales.',
       link: '#'
     },
     {
       image: 'assets/images/brazil/brazil-2.jpg',
-      tag: 'Tomorrowland Brasil',
+      tag: 'Ambiente',
       title: 'La energía de Brasil no tiene comparación',
       description: 'La bandera brasileña ondea entre luces y flores gigantes, en una de las noches más recordadas de esta edición.',
       link: '#'
     },
     {
       image: 'assets/images/brazil/brazil-3.jpg',
-      tag: 'Tomorrowland Brasil',
+      tag: 'Atmósfera',
       title: 'De día o de noche, la misma magia',
       description: 'Con el sol de frente o bajo las luces del escenario, la energía de Tomorrowland se vive igual de intensa.',
       link: '#'
     },
     {
       image: 'assets/images/brazil/brazil-4.jpg',
-      tag: 'Tomorrowland Brasil',
+      tag: 'Escenografía',
       title: 'Un escenario que parece sacado de otro mundo',
       description: 'Flores gigantes, luces bioluminiscentes y fuegos artificiales transforman cada noche en un espectáculo único.',
       link: '#'
     }
   ];
+  /* Nota: cada "tag" describe de qué trata esa noticia puntual (antes las
+     4 tarjetas repetían el mismo texto "Tomorrowland Brasil" — igual al
+     título de la sección, así que no distinguía nada entre ellas). */
 
   /* ============================================================
      ===== ESTACIÓN DE RADIO =====
@@ -156,7 +159,7 @@
       body.innerHTML = `
         <h3 class="news-card-title">${item.title}</h3>
         <p class="news-card-desc">${item.description}</p>
-        <a class="news-card-link" href="${item.link}">Ver más <span class="btn-arrow" aria-hidden="true">→</span></a>
+        <a class="news-card-link" href="${item.link}">Ver más</a>
       `;
 
       card.appendChild(media);
@@ -179,10 +182,10 @@
       const body = document.createElement('div');
       body.className = 'grid-card-body';
       body.innerHTML = `
-        <span class="grid-card-tag animate__animated animate__pulse animate__infinite animate__slower">${item.tag}</span>
+        <span class="grid-card-tag">${item.tag}</span>
         <h3 class="grid-card-title">${item.title}</h3>
         <p class="grid-card-desc">${item.description}</p>
-        <a class="grid-card-link" href="${item.link}">Leer más →</a>
+        <a class="grid-card-link" href="${item.link}">Leer más</a>
       `;
 
       card.appendChild(media);
@@ -208,7 +211,7 @@
         <h3 class="grid-card-title">${item.title}</h3>
         <p class="grid-card-desc">${item.description}</p>
         <p class="grid-card-meta">${item.meta}</p>
-        <a class="grid-card-link" href="${item.link}">Leer más →</a>
+        <a class="grid-card-link" href="${item.link}">Leer más</a>
       `;
 
       card.appendChild(media);

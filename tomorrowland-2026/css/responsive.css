@@ -21,7 +21,8 @@
   .section-inner { padding: 0 22px; }
   .header-inner { padding: 0 20px; }
 
-  .hero-arrow { width: 42px; height: 42px; margin-top: -21px; font-size: 1.3rem; }
+  /* 44px: tamaño mínimo recomendado de objetivo táctil (WCAG 2.5.5). */
+  .hero-arrow { width: 44px; height: 44px; margin-top: -22px; font-size: 1.3rem; }
   .hero-arrow-prev { left: 12px; }
   .hero-arrow-next { right: 12px; }
   .hero-dots { bottom: 78px; }
@@ -40,6 +41,10 @@
 @media (max-width: 480px) {
   .hero-title { font-size: clamp(2.6rem, 15vw, 4.5rem); }
   .hero-subtitle { letter-spacing: .2em; }
+  /* La fecha+lugar es el texto más largo del hero; con el letter-spacing
+     de escritorio (.22em) se parte en varias líneas incómodas en un
+     teléfono angosto (320-375px). */
+  .hero-eyebrow { letter-spacing: .1em; }
   .hero-content { padding: 0 16px; }
 
   .section-title { font-size: clamp(2rem, 8vw, 2.8rem); }

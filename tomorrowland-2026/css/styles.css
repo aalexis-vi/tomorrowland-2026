@@ -33,7 +33,11 @@
 
   --color-text:        #F3F1F9;
   --color-text-muted:  #9C97B3;
-  --color-text-faint:  #6C6784;
+  /* Antes #6C6784: contra --color-bg/--color-bg-alt daba ~3.6-3.7:1, por
+     debajo del mínimo 4.5:1 (WCAG AA) para texto chico, y este tono se usa
+     en textos de .78-.82rem (meta de tarjetas, breadcrumb, pie de página).
+     Este valor sube el contraste a ~5.5:1 manteniendo el mismo tono apagado. */
+  --color-text-faint:  #8983A8;
 
   --accent-violet:  #8A2BFF;
   --accent-magenta: #FF2E86;
@@ -77,6 +81,30 @@ button { font-family: inherit; cursor: pointer; background: none; border: none; 
   outline: 2px solid var(--accent-cyan);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ---------- Enlace "Saltar al contenido" ----------
+   Invisible hasta que recibe foco por teclado: permite a quien navega con
+   teclado/lector de pantalla saltarse el header y su menú (con varios
+   dropdowns) e ir directo al contenido principal, en vez de tabular por
+   toda la navegación en cada carga de página. */
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 2100;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-alt);
+  color: var(--color-text);
+  border: 1px solid var(--accent-cyan);
+  font-size: .9rem;
+  font-weight: 600;
+  transform: translateY(-150%);
+  transition: transform .25s var(--ease-out);
+}
+.skip-link:focus-visible {
+  transform: translateY(0);
 }
 
 /* ---------- 2. TIPOGRAFÍA BASE ---------- */
@@ -474,8 +502,11 @@ p { margin: 0; }
   display: none;
   flex-direction: column;
   gap: 5px;
-  width: 40px;
-  height: 40px;
+  /* 44x44 en vez de 40x40: tamaño mínimo recomendado de objetivo táctil
+     (WCAG 2.5.5). Las barras internas no cambian de tamaño, solo crece
+     el área de toque a su alrededor. */
+  width: 44px;
+  height: 44px;
   align-items: center;
   justify-content: center;
 }
@@ -1138,7 +1169,8 @@ p { margin: 0; }
 .footer-social { display: flex; flex-direction: column; align-items: flex-start; }
 .social-icons { display: flex; gap: 12px; margin-top: 4px; }
 .social-icon {
-  width: 42px; height: 42px;
+  /* 44px: tamaño mínimo recomendado de objetivo táctil (WCAG 2.5.5). */
+  width: 44px; height: 44px;
   border-radius: 50%;
   border: 1px solid var(--color-border);
   display: flex; align-items: center; justify-content: center;
