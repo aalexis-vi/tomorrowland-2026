@@ -77,6 +77,11 @@
       hamburgerBtn.classList.toggle('open', isOpen);
       hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
       hamburgerBtn.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+      // El CSS solo lo oculta visualmente (max-height:0); "inert" es lo que
+      // de verdad lo saca del orden de tabulación y del árbol de
+      // accesibilidad mientras está cerrado (ver el atributo inicial en
+      // index.html).
+      mobileMenu.inert = !isOpen;
       animateHamburger(isOpen);
     });
 
@@ -84,6 +89,7 @@
     mobileMenu.querySelectorAll('.mobile-link, .mobile-sublink').forEach((link) => {
       link.addEventListener('click', () => {
         mobileMenu.classList.remove('open');
+        mobileMenu.inert = true;
         hamburgerBtn.classList.remove('open');
         hamburgerBtn.setAttribute('aria-expanded', 'false');
         animateHamburger(false);

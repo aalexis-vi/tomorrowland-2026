@@ -78,5 +78,13 @@
 
     e.preventDefault();
     lenis.scrollTo(target, { offset: -headerHeight });
+
+    // Mueve el foco real al destino (ej. el enlace "Saltar al contenido"):
+    // sin esto, preventDefault() bloquea también el manejo nativo del
+    // navegador que movería el foco al saltar de ancla, así que alguien
+    // navegando con teclado solo vería el scroll, sin que el foco avance.
+    // No hace nada en destinos sin tabindex (la mayoría de las secciones),
+    // que es el comportamiento nativo del navegador de todos modos.
+    target.focus({ preventScroll: true });
   });
 })();

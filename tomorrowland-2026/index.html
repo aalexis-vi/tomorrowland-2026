@@ -113,8 +113,11 @@
       </button>
     </div>
 
-    <!-- Menú móvil desplegable -->
-    <div class="mobile-menu" id="mobileMenu">
+    <!-- Menú móvil desplegable. "inert" de arranque: coincide con el estado
+         cerrado (el CSS solo lo oculta visualmente con max-height:0, así
+         que sin esto sus enlaces seguían siendo alcanzables con Tab aunque
+         no se vieran — ver su toggle en js/navigation.js). -->
+    <div class="mobile-menu" id="mobileMenu" inert>
       <ul class="mobile-nav-list">
         <li><a href="#inicio" class="mobile-link">Inicio</a></li>
         <li class="mobile-accordion">
