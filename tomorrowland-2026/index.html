@@ -29,6 +29,10 @@
 </head>
 <body>
 
+  <!-- Salto de teclado directo al contenido, antes que el header y sus
+       menús desplegables (ver .skip-link en css/styles.css) -->
+  <a href="#inicio" class="skip-link">Saltar al contenido</a>
+
   <!-- Filtros SVG reutilizados por los efectos visuales (ver css/styles.css y js/effects.js).
        No se renderiza nada visible aquí: solo declara el filtro "goo" que funde
        las manchas de luz del hero en una sola forma líquida. -->
@@ -146,7 +150,9 @@
     </div>
   </header>
 
-  <main id="inicio">
+  <!-- tabindex="-1": el enlace "Saltar al contenido" mueve el foco aquí; sin
+       esto algunos navegadores solo hacen scroll sin llevarse el foco real. -->
+  <main id="inicio" tabindex="-1">
 
     <!-- ============================================================
          HERO / CARRUSEL PRINCIPAL
@@ -169,7 +175,7 @@
 
       <div class="hero-content">
         <span class="hero-logo" aria-hidden="true"></span>
-        <p class="hero-eyebrow">25 · 26 · 27 JULIO 2026 · BOOM, BÉLGICA</p>
+        <p class="hero-eyebrow">25–27 de julio de 2026, Boom, Bélgica</p>
         <h1 class="hero-title">Tomorrowland <span class="title-accent">2026</span></h1>
         <p class="hero-subtitle">A New Reality</p>
       </div>
@@ -190,7 +196,7 @@
     <section class="section section-belgium js-blur-on-scroll" id="belgica">
       <div class="section-inner">
         <div class="section-heading reveal">
-          <span class="section-eyebrow">Bélgica · Boom</span>
+          <span class="section-eyebrow">Boom, Bélgica</span>
           <h2 class="section-title">Visitar Tomorrowland Bélgica</h2>
         </div>
 
@@ -297,7 +303,7 @@
     <section class="section section-brazil js-blur-on-scroll" id="brasil">
       <div class="section-inner">
         <div class="section-heading reveal">
-          <span class="section-eyebrow">Brasil · Itu, São Paulo</span>
+          <span class="section-eyebrow">Itu, São Paulo</span>
           <h2 class="section-title">Tomorrowland Brasil 2027</h2>
         </div>
 
@@ -326,7 +332,7 @@
     <section class="section section-radio js-blur-on-scroll" id="radio">
       <div class="section-inner">
         <div class="section-heading reveal">
-          <span class="section-eyebrow"><span class="live-dot animate__animated animate__flash animate__infinite animate__slower" aria-hidden="true"></span>On air · 24/7</span>
+          <span class="section-eyebrow"><span class="live-dot animate__animated animate__flash animate__infinite animate__slower" aria-hidden="true"></span>En vivo, 24 horas</span>
           <h2 class="section-title">Estación de Radio</h2>
         </div>
 
